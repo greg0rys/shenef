@@ -34,4 +34,9 @@ class CompanyLocations extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class);
+    }
 }

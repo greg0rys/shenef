@@ -36,6 +36,12 @@ class Item extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function company_location(): BelongsTo
+    {
+        return $this->belongsTo(CompanyLocations::class);
+    }
+
+    // make an item quicker cause lazy
     public static function buildItem(int $itemTypeId, int $userId, int $assetNum, string $itemName): Item
     {
         $item = new Item();
