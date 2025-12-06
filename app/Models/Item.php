@@ -21,7 +21,7 @@ class Item extends Model
 
     /**
      * @return BelongsTo
-     * get the given type of an item.
+     * get the given type of item.
      */
     public function item_type(): BelongsTo
     {
@@ -47,11 +47,11 @@ class Item extends Model
     }
 
     // make an item quicker cause lazy
-    public static function buildItem(int $itemTypeId, int $userId, int $assetNum, string $itemName): Item
+    public static function buildItem(int $assetNum, string $itemName): Item
     {
         $item = new Item();
-        $item->item_type_id = $itemTypeId;
-        $item->user_id  = $userId;
+        $item->item_type_id = ItemType::all()->random()->id;
+        $item->user_id  = User::all()->random()->id;
         $item->company_location_id = CompanyLocations::all()->random()->id;
         $item->asset_id = $assetNum;
         $item->name = $itemName;
