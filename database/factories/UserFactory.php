@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\CompanyLocations;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -23,9 +24,16 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $first = $this->faker->firstName();
+        $last = $this->faker->lastName();
+        $full = $first . " " . $last;
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'company_location_id' => CompanyLocations::all()->random()->id,
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'full_name' => $full,
+            'personal_email' => $this->faker->unique()->safeEmail,
+            'company_name' => $this->faker->company,
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
