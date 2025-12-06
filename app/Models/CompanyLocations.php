@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\CompanyLocationsFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CompanyLocations extends Model
 {
-    /** @use HasFactory<\Database\Factories\CompanyLocationsFactory> */
+    /** @use HasFactory<CompanyLocationsFactory> */
     use HasFactory;
 
     protected $table = 'company_locations';
@@ -22,6 +23,8 @@ class CompanyLocations extends Model
         'zip',
         'location_id'
     ];
+
+    // a given location will belong to one parent
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);

@@ -16,6 +16,7 @@ class Item extends Model
         'item_type_id',
         'user_id',
         'asset_id',
+        'company_location_id'
     ];
 
     /**
@@ -40,6 +41,7 @@ class Item extends Model
         $item = new Item();
         $item->item_type_id = $itemTypeId;
         $item->user_id  = $userId;
+        $item->company_location_id = CompanyLocations::all()->random()->id;
         $item->asset_id = $assetNum;
         $item->name = $itemName;
 
