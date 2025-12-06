@@ -14,6 +14,7 @@ class ItemType extends Model
 
     protected $fillable = [
         'name',
+        'description',
     ];
 
     protected $table = 'item_types';
