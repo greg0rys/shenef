@@ -22,4 +22,6 @@ class Company extends Model
     {
         return $this->hasMany(CompanyLocations::class);
     }
+
+
 }

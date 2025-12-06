@@ -24,14 +24,20 @@
             asset id
         </th>
         <th>
-            name
+            item name
         </th>
 
         <th>
             item type
         </th>
         <th>
-            username
+            assigned user
+        </th>
+        <th>
+            item location
+        </th>
+        <th>
+            location id
         </th>
 
         </thead>
@@ -41,7 +47,9 @@
                 <td>{{$it->asset_id}}</td>
                 <td> {{$it->name}} </td>
                 <td>{{$it->item_type->name}}</td>
-                <td>{{$it->user->username}}</td>
+                <td>{{$it->user->full_name}}</td>
+                <td>{{$it->company_location->name}}</td>
+                <td>{{$it->company_location->id}}</td>
             </tr>
 
         @endforeach
