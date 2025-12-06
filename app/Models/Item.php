@@ -29,13 +29,18 @@ class Item extends Model
     }
 
     /**
-     * @return BelongsTo to identify assigned user.
+     * An item can be assigned to any user or set null
+     * @return BelongsTo
      */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * A given item resides at a given location at any time.
+     * @return BelongsTo
+     */
     public function company_location(): BelongsTo
     {
         return $this->belongsTo(CompanyLocations::class);

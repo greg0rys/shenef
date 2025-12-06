@@ -54,11 +54,19 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * A user can have any given number of assigned items.
+     * @return HasMany
+     */
     public function items(): HasMany
     {
         return $this->hasMany(Item::class);
     }
 
+    /**
+     * A user may only belong to one company
+     * @return BelongsTo
+     */
     public function company(): BelongsTo
     {
         return $this->belongsTo(

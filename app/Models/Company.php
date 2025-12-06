@@ -18,6 +18,22 @@ class Company extends Model
         'address',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'name' => 'string',
+        'address' => 'string',
+    ];
+
+    /**
+     * A company can have many locations under it.
+     * @return HasMany
+     */
     public function locations(): HasMany
     {
         return $this->hasMany(CompanyLocations::class);

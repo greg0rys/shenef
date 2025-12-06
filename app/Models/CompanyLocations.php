@@ -24,17 +24,28 @@ class CompanyLocations extends Model
         'location_id'
     ];
 
-    // a given location will belong to one parent
+    /**
+     * A company location must belong to a parent company
+     * @return BelongsTo
+     */
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
     }
-    // a location will have any given number of users.
+
+    /**
+     * A location can have many users assigned
+     * @return HasMany
+     */
     public function users(): HasMany
     {
         return $this->hasMany(User::class);
     }
 
+    /**
+     * A given location will have many items associated with it.
+     * @return HasMany
+     */
     public function items(): HasMany
     {
         return $this->hasMany(Item::class);
