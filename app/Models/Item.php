@@ -47,14 +47,15 @@ class Item extends Model
     }
 
     // make an item quicker cause lazy
-    public static function buildItem(int $assetNum, string $itemName): Item
+    public static function buildItem(string $itemName): Item
     {
         $item = new Item();
         $item->item_type_id = ItemType::all()->random()->id;
         $item->user_id  = User::all()->random()->id;
         $item->company_location_id = CompanyLocations::all()->random()->id;
-        $item->asset_id = $assetNum;
+        $item->asset_id = (Item::all()->random()->asset_id + 1);
         $item->name = $itemName;
+
 
         return $item;
     }

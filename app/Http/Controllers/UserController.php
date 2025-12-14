@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-class UserController extends Controller{
+use App\Models\User;
+
+class UserController extends Controller
+{
     public function index()
     {
-        //
+        $user = User::all();
+        return view('user.index', compact('user'));
     }
 }
