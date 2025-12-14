@@ -61,5 +61,17 @@ class ItemController extends Controller
             compact('item'));
     }
 
+    /**
+     * @param User $usr
+     * @param Item $item
+     * @return bool
+     * Transfer a given item to a user from the front end.
+     */
+    public function transferItem(User $usr, Item $item): bool
+    {
+        $item->user_id = $usr->id;
+        return $item->save();
+    }
+
 
 }
