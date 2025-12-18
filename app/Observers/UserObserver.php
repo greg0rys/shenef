@@ -19,6 +19,8 @@ class UserObserver
         if (empty($user->full_name)){
             $user->full_name = $user->first_name . ' ' . $user->last_name;
         }
+
+        $user->email_verified_at = now();
     }
 
     public function generateUsername(string $firstName, string $lastName): string

@@ -39,5 +39,10 @@ class Company extends Model
         return $this->hasMany(CompanyLocations::class);
     }
 
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class);
+    }
+
 
 }

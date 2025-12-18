@@ -6,6 +6,8 @@ use App\Models\Item;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 
 class ItemController extends Controller
 {
@@ -71,6 +73,13 @@ class ItemController extends Controller
     {
         $item->user_id = $usr->id;
         return $item->save();
+    }
+
+    public function deleteItem(Item $item): RedirectResponse
+    {
+        $item->delete();
+
+        return redirect()->route('items.index');
     }
 
 

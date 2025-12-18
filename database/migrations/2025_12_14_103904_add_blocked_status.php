@@ -11,7 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('blocked')->after('role_id')->default(false)->nullable();
+        });
     }
 
     /**
@@ -19,5 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };
