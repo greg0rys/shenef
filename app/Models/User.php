@@ -7,13 +7,14 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +23,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'company_location_id',
+        'role_id',
         'first_name',
         'last_name',
         'full_name',
@@ -39,6 +41,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -64,6 +68,18 @@ class User extends Authenticatable
     }
 
     /**
+     * @return BelongsTo
+     * Get a given users job role.
+     */
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(
+            UserRoles::class,
+            'role_id',
+            'id');
+    }
+
+    /**
      * A user may only belong to one company
      * @return BelongsTo
      */
@@ -74,4 +90,5 @@ class User extends Authenticatable
             'company_location_id',
             'id');
     }
+
 }

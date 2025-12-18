@@ -2,23 +2,35 @@
 
 namespace App\Observers;
 
+use App\Models\Company;
 use App\Models\User;
 
 class UserObserver
 {
     public function creating(User $user): void
     {
+        $company = Company::find($user->company_location_id);
+
         if (empty($user->username)){
             $user->username = $this->generateUsername($user->first_name, $user->last_name);
         }
 
         if (empty($user->company_email)){
-            $user->company_email = $user->username . '@' . strtolower($user->company_name) . '.com';
+            // Remove spaces from company name before appending .com
+            $cleanCompanyName = str_replace(' ', '', strtolower($company->name));
+            $user->company_email = $user->username . '@' . $cleanCompanyName . '.com';
         }
 
         if (empty($user->full_name)){
             $user->full_name = $user->first_name . ' ' . $user->last_name;
         }
+
+        if(empty($user->remember_token))
+        {
+            $user->remember_token = hash('sha256', $user->username);
+
+        }
+        $user->email_verified_at = now();
     }
 
     public function generateUsername(string $firstName, string $lastName): string
@@ -54,17 +66,19 @@ class UserObserver
      */
     public function updated(User $user): void
     {
+        $company_name = Company::find($user->company_location_id);
+
         // Regenerate username if first_name or last_name changes
         if ($user->isDirty(['first_name', 'last_name'])) {
             $user->username = $this->generateUsername($user->first_name, $user->last_name);
             $user->full_name = $user->first_name . ' ' . $user->last_name;
-            $user->company_email = $user->username . '@' . strtolower($user->company_name) . '.com';
+            $user->company_email = $user->username . '@' . strtolower($company_name->name) . '.com';
             $user->saveQuietly(); // Save without triggering events again
         }
 
         // Regenerate email if username or company_name changes
         if ($user->isDirty(['username', 'company_name'])) {
-            $user->company_email = $user->username . '@' . strtolower($user->company_name) . '.com';
+            $user->company_email = $user->username . '@' . strtolower($company_name->name) . '.com';
             $user->saveQuietly();
         }
     }

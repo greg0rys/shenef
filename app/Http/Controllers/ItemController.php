@@ -6,6 +6,8 @@ use App\Models\Item;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 
 class ItemController extends Controller
 {
@@ -59,6 +61,25 @@ class ItemController extends Controller
         return view(
             'item.item-information',
             compact('item'));
+    }
+
+    /**
+     * @param User $usr
+     * @param Item $item
+     * @return bool
+     * Transfer a given item to a user from the front end.
+     */
+    public function transferItem(User $usr, Item $item): bool
+    {
+        $item->user_id = $usr->id;
+        return $item->save();
+    }
+
+    public function deleteItem(Item $item): RedirectResponse
+    {
+        $item->delete();
+
+        return redirect()->route('items.index')->with('Success! Item has been deleted.');
     }
 
 

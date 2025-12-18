@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Item Table Preview')
+@section('title', 'All items')
 
 @section('content')
     <hgroup>
-        <h2>Item Table Preview</h2>
+        <h2>All Items</h2>
         <p>@gregs</p>
     </hgroup>
 
@@ -17,7 +17,6 @@
                 <th>Item Type</th>
                 <th>Assigned User</th>
                 <th>Item Location</th>
-                <th>Location ID</th>
             </tr>
             </thead>
             <tbody>
@@ -32,7 +31,6 @@
                         </a>
                     </td>
                     <td>{{ $it->company_location->name }}</td>
-                    <td>{{ $it->company_location->id }}</td>
                 </tr>
             @endforeach
             </tbody>

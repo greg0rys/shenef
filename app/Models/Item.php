@@ -59,4 +59,11 @@ class Item extends Model
 
         return $item;
     }
+
+    public static function transferItem(User $user, Item $item): bool
+    {
+        echo "Transferring $item->name to $user->full_name\n";
+        $item->user_id = $user->id;
+        return $item->save();
+    }
 }
