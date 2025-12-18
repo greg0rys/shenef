@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Item;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
@@ -63,6 +64,7 @@ class ItemController extends Controller
             compact('item'));
     }
 
+<<<<<<< Updated upstream
     /**
      * @param User $usr
      * @param Item $item
@@ -80,6 +82,11 @@ class ItemController extends Controller
         $item->delete();
 
         return redirect()->route('items.index')->with('Success! Item has been deleted.');
+=======
+    public function getAllCompanyItems(Company $company)
+    {
+
+>>>>>>> Stashed changes
     }
 
 

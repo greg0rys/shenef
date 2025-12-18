@@ -1,7 +1,12 @@
 <?php
 
+<<<<<<< Updated upstream
 use App\Http\Controllers\ItemController;
+=======
+use App\Http\Controllers\CompanyLocationsController;
+>>>>>>> Stashed changes
 use App\Http\Controllers\UserController;
+use App\Models\CompanyLocations;
 use Illuminate\Support\Facades\Route;
 
 Route::get(
@@ -10,11 +15,20 @@ Route::get(
         return view('item.index');
     });
 
+<<<<<<< Updated upstream
 Route::get(
     '/users/{user}/items',
     [ItemController::class, 'getUserItems'])
      ->name('users.items')
 ;
+=======
+// get all items for a user
+Route::get('/users/{user}/items', [ItemController::class,'getUserItems'])->name('users.items');
+
+Route::resource('items', ItemController::class);
+Route::resource('locations', CompanyLocationsController::class);
+
+>>>>>>> Stashed changes
 
 
 Route::get(

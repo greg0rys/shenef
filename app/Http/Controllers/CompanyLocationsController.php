@@ -63,4 +63,9 @@ class CompanyLocationsController extends Controller
     {
         //
     }
+
+    public function getCompanyItems(CompanyLocations $companyLocations)
+    {
+        $items = Item::with('companyLocations')->get();
+    }
 }
