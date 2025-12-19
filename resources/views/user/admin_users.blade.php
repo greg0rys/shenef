@@ -3,13 +3,21 @@
 
 @section('content')
 
-    @if(!$users->isEmpty())
-        Total Super Admins: {{$users->count()}}<br/>
+    @if(!$admin_users->isEmpty())
+        Total Admin Users: {{$admin_users->count()}}<br/>
     @endif
 
-    @foreach($users as $u)
+    @foreach($admin_users as $u)
 
-        <p> {{ $u->full_name }} <br/> ID: {{$u->id}} <br/> Admin Role: {{$u->role->name}} <br/>Contact {{$u->company_email}}</p>
+        @if($u->trashed())
+            <p>
+                {{$u->full_name}} deleted
+            </p>
+        @else
+            <p> {{ $u->full_name }} <br/> ID: {{$u->id}} <br/> Admin Role: {{$u->role->name}}
+                <br/>Contact {{$u->company_email}}</p>
+        @endif
+
     @endforeach
 @endsection
 

@@ -32,7 +32,7 @@ Route::resource(
     'locations',
     CompanyLocationsController::class);
 
-
+Route::get('/users/admins', [UserController::class, 'admin_users'])->name('users.admins');
 Route::resource(
     'users',
     UserController::class);
