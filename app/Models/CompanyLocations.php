@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Notifications\Notifiable;
+
 
 use Database\Factories\CompanyLocationsFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class CompanyLocations extends Model
 {
     /** @use HasFactory<CompanyLocationsFactory> */
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $table = 'company_locations';
     protected $fillable = [

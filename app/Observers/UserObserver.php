@@ -7,8 +7,22 @@ use App\Models\User;
 
 class UserObserver
 {
+    // use the creating function to observe when the object is new, if you use created it only triggers AFTEr it is made
+    // this way I can do field checks and assign values.
     public function creating(User $user): void
     {
+        if(!$user->isDirty('company_location_id'))
+        {
+            $user->company_location_id = 4; // default master company
+        }
+        if(!$user->isDirty('role_id'))
+        {
+            $user->role_id = 3;
+        }
+        if(!$user->isDirty('personal_email'))
+        {
+            $user->personal_email = 'nomail@nomail.com';
+        }
         $company = Company::find($user->company_location_id);
 
         if (empty($user->username)){
@@ -18,7 +32,7 @@ class UserObserver
         if (empty($user->company_email)){
             // Remove spaces from company name before appending .com
             $cleanCompanyName = str_replace(' ', '', strtolower($company->name));
-            $user->company_email = $user->username . '@' . $cleanCompanyName . '.com';
+            $user->company_email = str_replace(' ', '',$user->username . '@' . $cleanCompanyName . '.com');
         }
 
         if (empty($user->full_name)){
@@ -30,6 +44,7 @@ class UserObserver
             $user->remember_token = hash('sha256', $user->username);
 
         }
+
         $user->email_verified_at = now();
     }
 
@@ -72,7 +87,7 @@ class UserObserver
         if ($user->isDirty(['first_name', 'last_name'])) {
             $user->username = $this->generateUsername($user->first_name, $user->last_name);
             $user->full_name = $user->first_name . ' ' . $user->last_name;
-            $user->company_email = $user->username . '@' . strtolower($company_name->name) . '.com';
+            $user->company_email = str_replace(' ', '',$user->username . '@' . strtolower($company_name->name) . '.com');
             $user->saveQuietly(); // Save without triggering events again
         }
 

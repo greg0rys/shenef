@@ -31,6 +31,11 @@
                         </a>
                     </td>
                     <td>{{ $it->company_location->name }}</td>
+                    <td>
+                        <a href="{{ route('items.destroy', $it) }}" class="btn btn-warning">
+                            <i class="fa fa-edit"></i> Edit Item
+                        </a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

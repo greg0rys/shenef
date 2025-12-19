@@ -7,8 +7,6 @@ use App\Models\Item;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Redirect;
 
 class ItemController extends Controller
 {
@@ -64,29 +62,22 @@ class ItemController extends Controller
             compact('item'));
     }
 
-<<<<<<< Updated upstream
-    /**
-     * @param User $usr
-     * @param Item $item
-     * @return bool
-     * Transfer a given item to a user from the front end.
-     */
-    public function transferItem(User $usr, Item $item): bool
+
+    public function destroy(Item $it)
     {
-        $item->user_id = $usr->id;
-        return $item->save();
+        $it->delete();
+        return redirect()->route('items.index');
     }
 
-    public function deleteItem(Item $item): RedirectResponse
-    {
-        $item->delete();
-
-        return redirect()->route('items.index')->with('Success! Item has been deleted.');
-=======
-    public function getAllCompanyItems(Company $company)
+    public function show(Item $item)
     {
 
->>>>>>> Stashed changes
+        return view('item.show', compact('item'));
+    }
+
+    public function search(Item $item)
+    {
+        $items = Item::where('items.company_location_id', $item->company_location_id);
     }
 
 
