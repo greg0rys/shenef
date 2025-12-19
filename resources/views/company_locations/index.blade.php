@@ -14,7 +14,7 @@
     </hgroup>
 
     @foreach($items as $c)
-        <p>{{$c->name}}<br> Assigned To: {{$c->user->full_name}}</p>
+        <p>{{$c->name}}<br> Assigned To: {{$c->user->full_name}} <br/> {{$c->asset_id}}</p>
     @endforeach
 
 @endsection
