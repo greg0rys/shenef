@@ -74,7 +74,6 @@ class CompanyLocationsController extends Controller
 
     /**
      * @param CompanyLocations $companyLocation
-     * @return Factory|View|\Illuminate\View\View
      *
      * Get the items for a given company location. This expects the eloquent id not the facility id
      */
