@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\Item;
+use App\Models\ItemType;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -12,22 +13,17 @@ class ItemController extends Controller
 {
     public function index()
     {
-        $items = Item::with('item_type')
-                     ->get()
-        ;
+        $all_items = Item::all();
+        $items = $all_items->sortBy('company_location_id');
 
 
-        // loading with group by user id to keep the items clean
-        $grouped_items = $items
-            ->groupBy('user_id')
-            ->toArray()
-        ;
+
 
         return view(
             'item.index',
             compact(
-                'items',
-                'grouped_items')
+                'items'
+            )
         );
 
     }
@@ -35,6 +31,8 @@ class ItemController extends Controller
     /**
      * @param User $user - the given user to query e.g. users/{id}/items
      * @return Factory|View|\Illuminate\View\View
+     *
+     *
      */
     public function getUserItems(User $user)
     {
@@ -53,14 +51,6 @@ class ItemController extends Controller
                 'user'));
     }
 
-    // pass the given item to the view to see info about the item itself. inverse of above.
-    public function itemInformation(Item $item)
-    {
-        // use direct param - you have already passed the item in from the request.
-        return view(
-            'item.item-information',
-            compact('item'));
-    }
 
 
     public function destroy(Item $it)
@@ -75,9 +65,14 @@ class ItemController extends Controller
         return view('item.show', compact('item'));
     }
 
-    public function search(Item $item)
+    /**
+     * @return View
+     * Get items based on their item_type_id
+     */
+    public function getItemByType(ItemType $item_type)
     {
-        $items = Item::where('items.company_location_id', $item->company_location_id);
+        $items = Item::where('item_type_id', $item_type->item_type->id)->get();
+        return view('item.index', compact('items'));
     }
 
 

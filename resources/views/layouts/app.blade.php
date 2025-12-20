@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'My App')</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+
+    <style>
+        a {
+            text-decoration: none;
+            color: rebeccapurple;
+        }
+    </style>
 </head>
 <body>
 <nav class="container-fluid">

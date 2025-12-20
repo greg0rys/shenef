@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -28,6 +29,12 @@ class UserController extends Controller
 
 
         return view('user.admin_users', compact('admin_users'));
+    }
+
+    public function getItems(User $user)
+    {
+        $userItems = Item::where('user_id', $user->id)->get();
+        return view('user.items', compact('userItems'));
     }
 
     public function updateFirstName(User $u, string $name)

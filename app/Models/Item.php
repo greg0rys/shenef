@@ -14,6 +14,7 @@ class Item extends Model
 
     protected $fillable = [
         'name',
+        'notes',
         'item_type_id',
         'user_id',
         'asset_id',

@@ -17,7 +17,7 @@ Route::get(
     [ItemController::class, 'getUserItems'])
      ->name('users.items')
 ;
-
+Route::get('/items/{item_type}', [ItemController::class, 'getItemByType'])->name('items.byType');
 Route::resource(
     'items',
     ItemController::class);
@@ -32,7 +32,12 @@ Route::resource(
     'locations',
     CompanyLocationsController::class);
 
-Route::get('/users/admins', [UserController::class, 'admin_users'])->name('users.admins');
+Route::get('/users/{user}/items', [UserController::class, 'getItems'])->name('users.items');
+Route::get(
+    '/users/admins',
+    [UserController::class, 'admin_users'])
+     ->name('users.admins')
+;
 Route::resource(
     'users',
     UserController::class);
