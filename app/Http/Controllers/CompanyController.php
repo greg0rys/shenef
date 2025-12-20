@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\CompanyLocations;
+use App\Models\Item;
 
 class CompanyController extends Controller
 {
@@ -66,10 +67,15 @@ class CompanyController extends Controller
         //
     }
 
+    /**
+     * @param Company $company - the company we are searching for.
+     * Get all child companies under a parent.
+     */
     public function getChildCompanies(Company $company)
     {
         $children = CompanyLocations::where('parent_company_id', $company->id)->get();
         $children->sortBy('location_id');
+
         return view('company.children', ['children' => $children, 'company' => $company]);
     }
 }

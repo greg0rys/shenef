@@ -1,18 +1,17 @@
 @extends('layouts.app')
-@section('title', 'all companies')
+@section('title', 'All Companies')
 
 @section('content')
     <table>
         <thead>
             <th>Company</th>
-
         </thead>
 
         <tbody>
         @foreach($companies as $c)
             <tr>
                 <td>
-                    {{$c->name}}
+                    <a href="{{route('companies.children', $c)}}"> {{$c->name}}</a>
                 </td>
             </tr>
         @endforeach

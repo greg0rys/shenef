@@ -83,4 +83,5 @@ class CompanyLocationsController extends Controller
         $items = Item::where('company_location_id','=', $companyLocation->id)->get();
         return view('company_locations.index', compact('items'));
     }
+
 }
