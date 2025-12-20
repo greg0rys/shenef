@@ -43,7 +43,8 @@ class ItemObserver
      */
     public function updated(Item $item): void
     {
-        //
+        if($item->deleted_at)
+            $item->notes = "Item Deleted on: $item->deleted_at";
     }
 
     /**
@@ -52,6 +53,8 @@ class ItemObserver
     public function deleted(Item $item): void
     {
         //
+        $item->deployment_status = "Destroyed";
+
     }
 
     /**

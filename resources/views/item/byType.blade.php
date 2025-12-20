@@ -4,7 +4,11 @@
 
 @section('content')
     <hgroup>
-        <h2>All Items</h2>
+        <h2>Item Type: @if($items->isNotEmpty())
+                {{$items->first()->item_type->name}}
+            @else
+                NULL
+            @endif</h2>
         <p>@gregs</p>
     </hgroup>
 
@@ -14,7 +18,6 @@
             <tr>
                 <th>Asset ID</th>
                 <th>Item Name</th>
-                <th>Item Type</th>
                 <th>Make</th>
                 <th>Model</th>
                 <th>Assigned User</th>
@@ -30,9 +33,7 @@
                 <tr>
                     <td>{{ $it->asset_id }}</td>
                     <td>
-                        <a href="{{ route('items.show', $it->id) }}">{{$it->name}}</a></td>
-
-                    <td><a href="{{route('items.byType', $it->item_type->id)}}"> {{ $it->item_type->name }}</a>
+                        <a href="{{ route('items.show', $it->id) }}">{{$it->name}}</a>
                     </td>
                     <td>{{ $it->make }}</td>
                     <td>{{ $it->model }}</td>
@@ -44,14 +45,30 @@
 
                     </td>
                     <td>{{ $it->company_location->location_id }} - {{ $it->company_location->name }}</td>
-                    <td>{!!   $it->notes !!}</td>
-                    <td>{{ $it->deployment_status }}</td>
-                    <td>{{ $it->updated_at }}</td>
-                    <td>
+                    <td>{!! $it->notes !!}</td>
+
+                    @if($it->deployment_status == 'Deployed')
+                        <td style="color:darkslateblue">{{ $it->deployment_status }}</td>
+                    @elseif($it->deployment_status == 'Destroyed')
+                        <td style="color:darkred">{{ $it->deployment_status }}</td>
+                    @else
+                        <td style="color:darkgreen">{{ $it->deployment_status }}</td>
+                    @endif
+
+{{--                    check to see if deleted at is set or not.--}}
+                    @if($it->deleted_at)
+                        <td style="color: darkred">
+                            {{ $it->deleted_at->format('m/d/y') }}</td>
+                        <td>
+                    @else
+                        <td style="color:orange">
+                            {{ $it->updated_at->format('m/d/y') }}</td>
+                        <td>
+                    @endif
+
                         <a href="{{ route('items.destroy', $it) }}" class="btn btn-warning">
                             <i class="fa fa-edit"></i> Edit Item
                         </a>
-                        <a href="{{ route('items.edit', $it) }}"> Edit Item now</a>
                     </td>
                 </tr>
             @endforeach

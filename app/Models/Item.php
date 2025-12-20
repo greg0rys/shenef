@@ -15,10 +15,12 @@ class Item extends Model
     protected $fillable = [
         'name',
         'notes',
+        'make',
+        'model',
         'item_type_id',
         'user_id',
         'asset_id',
-        'company_location_id'
+        'company_location_id',
     ];
 
     /**
