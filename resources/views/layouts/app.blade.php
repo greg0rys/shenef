@@ -21,6 +21,8 @@
     <ul>
         <li><a href="{{ url('items') }}">Items</a></li>
         <li><a href="{{ url('users') }}">Users</a></li>
+        <li><a href="{{ url('companies') }}">Companies</a></li>
+
 
     </ul>
 </nav>

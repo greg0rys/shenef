@@ -101,7 +101,7 @@ class ItemController extends Controller
             ->route('items.index')
             ->with(
                 'success',
-                'updated user')
+                'updated item')
         ;
     }
 
