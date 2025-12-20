@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyLocationsController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
@@ -41,4 +42,7 @@ Route::get(
 Route::resource(
     'users',
     UserController::class);
+
+Route::get('/companies/{company}/children', [CompanyController::class, 'getChildCompanies'])->name('companies.children');
+Route::resource('companies', CompanyController::class);
 

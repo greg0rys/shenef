@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
+use App\Models\CompanyLocations;
 
 class CompanyController extends Controller
 {
@@ -13,7 +14,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -62,5 +63,12 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         //
+    }
+
+    public function getChildCompanies(Company $company)
+    {
+        $children = CompanyLocations::where('parent_company_id', $company->id)->get();
+        $children->sortBy('location_id');
+        return view('company.children', ['children' => $children, 'company' => $company]);
     }
 }
