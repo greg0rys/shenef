@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 
 
@@ -58,5 +59,10 @@ class CompanyLocations extends Model
             Item::class,
             'company_location_id',
             'id');
+    }
+
+    public function admin(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'manager_user', 'id');
     }
 }

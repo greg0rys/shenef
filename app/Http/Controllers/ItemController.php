@@ -12,8 +12,7 @@ class ItemController extends Controller
 {
     public function index()
     {
-        $all_items = Item::withTrashed()
-                         ->get()
+        $all_items = Item::all()
         ;
         $items = $all_items->sortBy('company_location_id');
 

@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
 
     <style>
+        body{
+            background: #dee2e6;
+        }
         a {
             text-decoration: none;
-            color: rebeccapurple;
+            color: #6610f2;
         }
     </style>
 </head>

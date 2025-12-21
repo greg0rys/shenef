@@ -91,4 +91,10 @@ class User extends Authenticatable
             'id');
     }
 
+    /**
+     * TEST FUNCTION ONLY
+     */
+
+
+
 }

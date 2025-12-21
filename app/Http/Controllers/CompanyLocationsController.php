@@ -53,9 +53,10 @@ class CompanyLocationsController extends Controller
                      ->get()
         ;
         $company_name = $companyLocation->name;
+        $companyLocation->load('admin');
         return view(
             'company_locations.index',
-            ['company_name' => $company_name, 'items' => $items]);
+            ['location' => $companyLocation, 'company_name' => $company_name, 'items' => $items]);
     }
 
     /**

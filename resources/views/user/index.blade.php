@@ -6,7 +6,32 @@
     <hgroup>
         <h2>Total Users {{$user->count()}}</h2>
     </hgroup>
-    @foreach($user as $u)
-        <p><span>{{$u->id}}. </span>{{$u->full_name}}</p>
-    @endforeach
+    <table>
+        <thead>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Job Role</th>
+        </thead>
+
+        <tbody>
+        @foreach($user as $u)
+            <tr>
+                <td>
+                    {{$u->id}}
+                </td>
+                <td>
+                    {{$u->full_name}}
+                </td>
+                <td>
+                    {{$u->company->name}}
+                </td>
+                <td>
+                    {{$u->role->name}}
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+
 @endsection
