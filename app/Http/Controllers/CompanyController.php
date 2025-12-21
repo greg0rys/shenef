@@ -6,7 +6,6 @@ use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
 use App\Models\CompanyLocations;
-use Illuminate\Support\Facades\DB;
 
 class CompanyController extends Controller
 {
@@ -44,13 +43,31 @@ class CompanyController extends Controller
     public function show(Company $company)
     {
         $company->load('locations');
+
+        return view('company.show', compact('company'));
+    }
+
+    /**
+     * @param Company $company
+     * Get the locations count and children for a given parent company.
+     *
+     */
+    public function company_home(Company $company)
+    {
+        $company->load('locations');
         $company->loadCount('locations');
 
         // get the locations of the parent company
-        $locations = CompanyLocations::where('parent_company_id', $company->id)->get();
-        $locations->loadCount('items');
+        $locations = CompanyLocations::where(
+            'parent_company_id',
+            $company->id)
+                                     ->get()
+        ;
+        $locations->loadCount('items'); // load the counts of each child location on the parent
 
-        return view('company.show', ['company' => $company, 'locations' => $locations]);
+        return view(
+            'company.company_home',
+            ['company' => $company, 'locations' => $locations]);
     }
 
     /**

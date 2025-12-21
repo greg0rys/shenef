@@ -58,8 +58,8 @@ Route::get(
 ;
 Route::get(
     '/companies/{company}/home',
-    [CompanyController::class, 'show'])
-     ->name('company.show')
+    [CompanyController::class, 'company_home'])
+     ->name('company.company_home')
 ;
 Route::resource(
     'companies',
