@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CompanyLocations;
 use App\Http\Requests\StoreCompanyLocationsRequest;
 use App\Http\Requests\UpdateCompanyLocationsRequest;
+use App\Models\CompanyLocations;
 use App\Models\Item;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 
 class CompanyLocationsController extends Controller
 {
@@ -16,10 +14,15 @@ class CompanyLocationsController extends Controller
      */
     public function index()
     {
-        $locations = CompanyLocations::all()->unique('name')->sortBy('location_id'); // dont get repeats and sort
+        $locations = CompanyLocations::all()
+                                     ->unique('name')
+                                     ->sortBy('location_id')
+        ; // dont get repeats and sort
         // them by their location id
 
-        return view('companylocations.index', compact('locations'));
+        return view(
+            'companylocations.index',
+            compact('locations'));
     }
 
     /**
@@ -43,9 +46,16 @@ class CompanyLocationsController extends Controller
      */
     public function show(CompanyLocations $companyLocation)
     {
-        $items = Item::where('company_location_id','=', $companyLocation->id)->get();
+        $items = Item::where(
+            'company_location_id',
+            '=',
+            $companyLocation->id)
+                     ->get()
+        ;
         $company_name = $companyLocation->name;
-        return view('company_locations.index', ['company_name' => $company_name, 'items' => $items]);
+        return view(
+            'company_locations.index',
+            ['company_name' => $company_name, 'items' => $items]);
     }
 
     /**
@@ -79,8 +89,15 @@ class CompanyLocationsController extends Controller
      */
     public function getLocationItems(CompanyLocations $companyLocation)
     {
-        $items = Item::where('company_location_id','=', $companyLocation->id)->get();
-        return view('company_locations.index', compact('items'));
+        $items = Item::where(
+            'company_location_id',
+            '=',
+            $companyLocation->id)
+                     ->get()
+        ;
+        return view(
+            'company_locations.index',
+            compact('items'));
     }
 
 }

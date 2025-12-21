@@ -27,17 +27,22 @@ class Company extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-        'name' => 'string',
-        'address' => 'string',
+        'name'       => 'string',
+        'address'    => 'string',
     ];
 
     /**
      * A company can have many locations under it.
+     *
+     * NOTE by default pass in the fk and local key to all relationships with keys
      * @return HasMany
      */
     public function locations(): HasMany
     {
-        return $this->hasMany(CompanyLocations::class);
+        return $this->hasMany(
+            CompanyLocations::class,
+            'parent_company_id',
+            'id');
     }
 
     public function items(): HasMany

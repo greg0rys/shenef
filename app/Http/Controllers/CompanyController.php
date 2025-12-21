@@ -39,10 +39,18 @@ class CompanyController extends Controller
 
     /**
      * Display the specified resource.
+     * The current method needs to be changed to another one, this is a specific type of show.
      */
     public function show(Company $company)
     {
-        //
+        $company->load('locations');
+        $company->loadCount('locations');
+
+        // get the locations of the parent company
+        $locations = CompanyLocations::where('parent_company_id', $company->id)->get();
+        $locations->loadCount('items');
+
+        return view('company.show', ['company' => $company, 'locations' => $locations]);
     }
 
     /**

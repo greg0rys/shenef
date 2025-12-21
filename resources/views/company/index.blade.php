@@ -5,6 +5,7 @@
     <table>
         <thead>
             <th>Company</th>
+            <th>Total Locations</th>
         </thead>
 
         <tbody>
@@ -12,6 +13,9 @@
             <tr>
                 <td>
                     <a href="{{route('companies.children', $c)}}"> {{$c->name}}</a>
+                </td>
+                <td>
+                    {{ $c->locations->count() }}
                 </td>
             </tr>
         @endforeach

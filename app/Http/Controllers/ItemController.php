@@ -56,7 +56,7 @@ class ItemController extends Controller
         $item->delete();
         $item->deployment_status = "Destroyed";
         $item->save();
-        return redirect()->route('items.index');
+        return redirect()->route('items.index')->with('Success', 'Item deleted!');
     }
 
     public function show(Item $item)
@@ -97,6 +97,7 @@ class ItemController extends Controller
     public function update(UpdateItemRequest $request, Item $item)
     {
         $item->update($request->validated());
+
         return redirect()
             ->route('items.index')
             ->with(

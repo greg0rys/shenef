@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Notifications\Notifiable;
-
 
 use Database\Factories\CompanyLocationsFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
+
 
 class CompanyLocations extends Model
 {
@@ -28,11 +28,15 @@ class CompanyLocations extends Model
 
     /**
      * A company location must belong to a parent company
+     * We need to learn what convention laravel expects so we don't have to specify our keys
      * @return BelongsTo
      */
     public function company(): BelongsTo
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(
+            Company::class,
+            'parent_company_id',
+            'id');
     }
 
     /**
@@ -50,6 +54,9 @@ class CompanyLocations extends Model
      */
     public function items(): HasMany
     {
-        return $this->hasMany(Item::class, 'company_location_id', 'id');
+        return $this->hasMany(
+            Item::class,
+            'company_location_id',
+            'id');
     }
 }
