@@ -3,7 +3,7 @@
 use App\Models\CompanyLocations;
 use App\Models\Item as it;
 use App\Models\ItemType as itType;
-use App\Models\User;
+use App\Models\User as u;
 
 //echo "Searching for the name of the first item: " . it::find(1)->name;
 //
@@ -38,9 +38,9 @@ use App\Models\User;
 
 
 
-echo "\ntest begin\n";
-echo str_repeat('**', 25);
-echo "\n";
+//echo "\ntest begin\n";
+//echo str_repeat('**', 25);
+//echo "\n";
 
 //for($i = 0; $i < 2; $i++)
 //    User::all()->last()->delete();
@@ -50,14 +50,26 @@ echo "\n";
 //echo "updated email => " . $test->company_email . "\n\n";
 
 // test all user functions.
-$last_item = it::all()->last();
-echo "Last item: $last_item->name\n";
-echo "Last item id: $last_item->id\n";
-echo "Assigned to: " . $last_item->user->username . "\n";
-echo "Located At: " . $last_item->company_location->name . "\n";
+//$last_item = it::all()->last();
+//echo "Last item: $last_item->name\n";
+//echo "Last item id: $last_item->id\n";
+//echo "Assigned to: " . $last_item->user->username . "\n";
+//echo "Located At: " . $last_item->company_location->name . "\n";
+//
+//echo str_repeat('**', 25);
+//it::all()->each(function ($item) {
+//    $item->asset_id = rand(1010200, 9999999);
+//    $item->save();
+//});
+//
+//
+//$first = it::where('id', 1)->first();
+//$first->name = "something gay";
+//$first->notes = fake()->text(120);
+//$first->save();
 
-echo str_repeat('**', 25);
-it::all()->each(function ($item) {
-    $item->asset_id = rand(1010200, 9999999);
-    $item->save();
-});
+
+
+
+
+
